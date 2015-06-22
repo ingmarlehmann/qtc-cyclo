@@ -98,7 +98,7 @@ void CYCLOPlugin::triggerAction()
                     .arg(obj->objectName())
                     .arg(QString::fromLocal8Bit(obj->metaObject()->className()));
 
-            qDebug() << objInfo;
+           // qDebug() << objInfo;
 
             editors.append(objInfo);
         //}
@@ -113,4 +113,5 @@ void CYCLOPlugin::handleDocumentsChange(const QModelIndex& topLeft, const QModel
 {
     Q_UNUSED(roles);
     qDebug() << "Document data changed: topLeft: " << topLeft.column() << " " << topLeft.row() << " bottomRight: " << bottomRight.column() << " " << bottomRight.row();
+    qDebug() << "Document file name: " << Core::DocumentModel::entryAtRow(topLeft.row())->fileName().toString();
 }

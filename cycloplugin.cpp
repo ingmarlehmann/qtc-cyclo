@@ -23,6 +23,8 @@
 
 #include <QtPlugin>
 
+#include <ui_dialog.h>
+
 using namespace Cyclo::Internal;
 
 CYCLOPlugin::CYCLOPlugin()
@@ -83,30 +85,37 @@ ExtensionSystem::IPlugin::ShutdownFlag CYCLOPlugin::aboutToShutdown()
 
 void CYCLOPlugin::triggerAction()
 {
-    ExtensionSystem::PluginManager* pm
-            = ExtensionSystem::PluginManager::instance();
 
-    QList<QObject*> objects
-            = pm->allObjects();
+    QDialog *dialogWidget = new QDialog();
+    Ui::Dialog dlg;
 
-    QString editors(QString::fromLocal8Bit("test"));
+    dlg.setupUi(dialogWidget);
+    dialogWidget->show();
 
-    Q_FOREACH(QObject* obj, objects)
-    {
-        //if(qobject_cast<Core::IEditor*>(obj)){
-            QString objInfo = QString(QString::fromLocal8Bit("%1 (%2)"))
-                    .arg(obj->objectName())
-                    .arg(QString::fromLocal8Bit(obj->metaObject()->className()));
+//    ExtensionSystem::PluginManager* pm
+//            = ExtensionSystem::PluginManager::instance();
 
-           // qDebug() << objInfo;
+//    QList<QObject*> objects
+//            = pm->allObjects();
 
-            editors.append(objInfo);
-        //}
-    }
+//    QString editors(QString::fromLocal8Bit("test"));
 
-    QMessageBox::information(Core::ICore::mainWindow(),
-                             tr("Action triggered"),
-                             editors);
+//    Q_FOREACH(QObject* obj, objects)
+//    {
+//        //if(qobject_cast<Core::IEditor*>(obj)){
+//            QString objInfo = QString(QString::fromLocal8Bit("%1 (%2)"))
+//                    .arg(obj->objectName())
+//                    .arg(QString::fromLocal8Bit(obj->metaObject()->className()));
+
+//           // qDebug() << objInfo;
+
+//            editors.append(objInfo);
+//        //}
+//    }
+
+//    QMessageBox::information(Core::ICore::mainWindow(),
+//                             tr("Action triggered"),
+//                             editors);
 }
 
 void CYCLOPlugin::handleDocumentsChange(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles)
